@@ -1,5 +1,7 @@
 package com.praj.showease.test.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.praj.showease.test.dto.CustomerDto;
@@ -16,5 +18,5 @@ public interface CustomerService {
 	
 	public ResponseEntity<ResponseStructure<Customer>> deleteByCustomerId(String custId);
 	
-	public ResponseEntity<ResponseStructure<Customer>> findAllCustomers();
+	public ResponseEntity<ResponseStructure<List<Customer>>> findAllCustomers();
 }

@@ -1,6 +1,11 @@
 package com.praj.showease.test.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +29,17 @@ public class CustomerController {
 	public ResponseEntity<ResponseStructure<Customer>> saveCustomer(@RequestBody CustomerDto customerDto) {
 		return customerService.saveCustomer(customerDto);
 	}
-    
+ 
+	/* This Method Deletes the customer by their custId; */
+	@DeleteMapping("/{custId}")
+	public ResponseEntity<ResponseStructure<Customer>> deleteByCustomerId(@PathVariable("custId") String custId) {
+		return customerService.deleteByCustomerId(custId);
+	}
+	
+	/*This Method retrieves all customers (without custId in the URL)*/
+	@GetMapping
+	public ResponseEntity<ResponseStructure<List<Customer>>> findAllCustomers() {
+		return customerService.findAllCustomers();
+	}
+	
 }
