@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.praj.showease.test.dto.CustomerDto;
 import com.praj.showease.test.exceptions.CustomerNotDeletedException;
+import com.praj.showease.test.exceptions.CustomerNotFoundByIdException;
 import com.praj.showease.test.model.Customer;
 import com.praj.showease.test.repository.CustomerRepository;
 import com.praj.showease.test.service.CustomerService;
@@ -67,7 +68,14 @@ public class CustomerServiceImpl  implements CustomerService{
 	@Override
 	public ResponseEntity<ResponseStructure<Customer>> updateByCustomerId(String custId, CustomerDto customerDto) {
 		// TODO Auto-generated method stub
-		return null;
+		Customer updateCustomer = mapToCustomer(customerDto);
+		return customerRepository.findById(custId).map(exCust -> {
+			updateCustomer.setCustId(exCust.getCustId());
+			exCust = customerRepository.save(updateCustomer);
+			return ResponseEntity.ok(responseStructure.setStatuscode(HttpStatus.OK.value())
+					.setMessage("Cust Data Updated Successfully!")
+					.setData(updateCustomer));
+		}).orElseThrow( () -> new CustomerNotFoundByIdException("Customer Not Found!"));
 	}
 
 
