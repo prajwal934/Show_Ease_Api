@@ -47,10 +47,13 @@ public class FeedBackServiceImpl implements FeedBackService{
 					.fId(randomFeedBackId).build();
 	}
 
+
 	@Override
 	public ResponseEntity<ResponseStructure<List<FeedBack>>> getAllFeedBack() {
 		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.ok(rs.setStatuscode(HttpStatus.OK.value())
+				.setMessage("FeedBack Data Fetched Successfully!")
+				.setData(feedBackRepository.findAll()));
 	}
 
 	@Override
