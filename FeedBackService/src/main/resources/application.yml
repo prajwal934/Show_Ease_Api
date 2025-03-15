@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: FEEDBACK_SERVICE
+    
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: Show-Ease
+
+server:
+  port: 8081
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka 
+#
+#      
+#server:
+#    port: 8083
