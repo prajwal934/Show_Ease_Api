@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,4 +36,8 @@ public class FeedBackController {
 		return feedBackService.getAllFeedBack();
 	}
 	
+	@GetMapping("/customers/{custId}")
+	public ResponseEntity<ResponseStructure<List<FeedBack>>> getFeedBackByCustId(@PathVariable("custId") String custId) {
+		return feedBackService.getFeedBackByCustId(custId);
+	}
 }

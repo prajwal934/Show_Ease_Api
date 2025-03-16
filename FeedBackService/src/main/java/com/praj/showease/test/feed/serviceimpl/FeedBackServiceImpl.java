@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.praj.showease.test.feed.dto.FeedBackDto;
+import com.praj.showease.test.feed.exceptions.FeedBackNotFoundException;
 import com.praj.showease.test.feed.model.FeedBack;
 import com.praj.showease.test.feed.repository.FeedBackRepository;
 import com.praj.showease.test.feed.service.FeedBackService;
@@ -56,10 +57,15 @@ public class FeedBackServiceImpl implements FeedBackService{
 				.setData(feedBackRepository.findAll()));
 	}
 
+	/* Here i get the data of the feedback by the help of Customer Id */
 	@Override
 	public ResponseEntity<ResponseStructure<List<FeedBack>>> getFeedBackByCustId(String custId) {
 		// TODO Auto-generated method stub
-		return null;
+		return feedBackRepository.findByCustId(custId).map(feedback -> ResponseEntity.ok(
+				rs.setStatuscode(HttpStatus.OK.value())
+				.setMessage("FeedBack By Customers have been founded Successfully!")
+				.setData(feedback)))
+				.orElseThrow(() -> new FeedBackNotFoundException("Sorry, It's not found!!!"));
 	}
 
 	@Override
